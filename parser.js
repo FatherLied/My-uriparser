@@ -31,9 +31,7 @@ function parseUri(uri) {
 
     uriParts.scheme = uri.substring(0, (schemeEndIndex) );
     uri = uri.substring((schemeEndIndex + 3) , (uri.length));
-
-    var pathStartIndex = uri.indexOf("/");
-    var queryStartIndex = uri.indexOf("?");
+    
     var fragmentStartIndex = uri.indexOf("#");
 
     if(fragmentStartIndex >= 0){
@@ -41,10 +39,14 @@ function parseUri(uri) {
         uri = uri.substring(0,fragmentStartIndex);
     }
 
+    var queryStartIndex = uri.indexOf("?");
+
     if(queryStartIndex >= 0){
         uriParts.fragment = uri.substring((queryStartIndex + 1),uri.length);
         uri = uri.substring(0,queryStartIndex);
     }
+
+    var pathStartIndex = uri.indexOf("/");
 
     if(pathStartIndex >= 0){
         uriParts.path = uri.substring(pathStartIndex, uri.length);
